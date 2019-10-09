@@ -20,8 +20,9 @@
 <option value="7">7</option>
 </select></div>
 <div>Max Password Length<input type="text" id="MaxLength"></input></div>
-<div>number substitution<input type="checkbox"></input></div>
-<div><button onclick="checkvalidity();randomSelect();">submit</button></div>
+<div>Number substitution<input type="checkbox" id="numSubsti"></input></div>
+<div>Right hand words<input type="checkbox" id="rightHand"></input></div>
+<div><button onclick="callIt();">submit</button></div>
 </center>
 <table id="tbl"></table>
 </body>
@@ -1025,6 +1026,16 @@ meant
 quotient
 teeth
 shellneck`
+var rightHandsWords = `hi, hili, hill, hillo, hilly, hilum, him, hin, hinny, hip, hippo, hippy, hm, hmm, ho, hokily, hokku, hokum, hokypoky, holily, holk, hollo, holloo, holly, holm, holmium, holp, holy, homily, hominy, homo, homonym, homonymy, homophony, homy, hon, honk, honky, hook, hookup, hooky, hooly, hoop, hoopoo, hop, hoppy, hoy, huh, huipil, hulk, hulky, hull, hullo, hum, hump, humph, humpy, hun, hunh, hunk, hunky, hup, hymn, hyp, hypo, hypolimnion, hypopyon, ikon, ilium, ilk, ill, illinium, illy, imino, immy, imp, impi, imply, in, inion, ink, inky, inly, inn, inulin, ion, ionium, jill, jillion, jiminy, jimminy, jimmy, jimp, jimply, jimpy, jin, jink, jinn, jinni, jo, john, johnny, join, jokily, joky, jollily, jolly, jouk, joy, joypop, juju, jump, jumpily, jumpy, jun, junk, junky, jupon, khi, khoum, kilim, kill, killjoy, kiln, kilo, kimono, kin, kinin, kink, kinkily, kinky, kino, kip, knoll, knolly, knop, kohl, koi, kolo, konk, kook, kooky, kop, koph, li, lily, limn, limo, limp, limpkin, limply, limuli, limy, lin, linin, link, linkup, linky, linn, lino, linum, liny, lion, lip, lipin, lippy, lo, loin, loll, lollipop, lollop, lolly, lollypop, loo, look, lookup, loom, loon, loony, loop, loopy, lop, loppy, loup, lull, lulu, lum, lump, lumpily, lumpy, lunk, luny, lupin, lupulin, lymph, mho, mi, mil, milium, milk, milkily, milky, mill, millimho, milliohm, million, milo, mim, mini, minikin, minim, minimill, minimum, minion, minium, mink, minny, mm, mo, moil, mojo, mol, moll, molly, moly, mom, momi, mommy, mon, monk, mono, monohull, monophony, monophyly, monopoly, mony, moo, mool, moon, moonily, moony, mop, mopy, moujik, moulin, mu, muhly, mujik, mukluk, mull, mullion, mum, mumm, mummy, mump, mumu, mun, muni, munnion, muon, muonium, muumuu, my, myopy, nihil, nil, nill, nim, ninny, ninon, nip, nippily, nippy, no, noh, noil, noily, nolo, nom, nomoi, nonillion, nonoily, nonunion, nonyl, noo, nook, nooky, noon, noun, nu, null, nun, nylon, nymph, nympho, oh, ohm, oho, oil, oilily, oily, oink, olio, om, on, onion, oniony, onium, only, ooh, oomph, op, opinion, opium, ouph, oy, phi, phon, phonily, phono, phonon, phony, phyllo, phylon, phylum, pi, piki, pili, pill, pillion, pily, pimp, pimply, pin, pinion, pink, pinkly, pinko, pinky, pinny, pinon, pinup, piny, pinyin, pinyon, pion, pip, pipkin, pippin, pipy, piu, plink, plonk, plop, ploy, plum, plummy, plump, plumply, plumy, plunk, ply, poh, poi, poilu, pokily, poky, pol, polio, poll, pollinium, polo, polonium, poly, polynyi, polyp, polyphony, polypi, pom, pommy, pomp, pompom, pompon, pony, pooh, pool, poon, poop, pop, poplin, poppy, poyou, pul, puli, pulik, pull, pullup, pulp, pulpily, pulpy, pump, pumpkin, pun, punily, punk, punkin, punky, punny, puny, pup, pupil, puppy, pyin, pylon, uh, ulu, um, umm, ump, un, unhip, unholily, unholy, unhook, union, unkink, unlink, unpin, up, uphill, uplink, upo, upon, yill, yin, yip, yo, yok, yolk, yolky, yom, yomim, yon, yoni, you, youpon, yuk, yum, yummy, yup, yupon`
+var string_list = longString.split("\n");
+var string_list_length = string_list.length;
+var rHW_list = rightHandsWords.split(", ");
+var rHW_list_length = rHW_list.length;
+function callIt(){
+  if (checkvalidity()){
+    randomSelect();
+  }
+}
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -1033,35 +1044,62 @@ function checkvalidity(){
   var min = document.querySelector("#Min").value;
   var maxLength = document.querySelector("#MaxLength").value;
   if(max<min){
-    alert("max is smaller than min");
-  if(maxLength<min){
-    alert("maxLength cannot be smaller than min");
+    alert("Max word Length is smaller than minimum word Length");
+    return false;
   }
+  if(parseInt(maxLength,10)<min){
+    alert("Max password Length cannot be smaller than minimum word Length");
+    return false;
   }
+  return true;
 }
-var string_list = longString.split("\n");
-var string_list_length = string_list.length;
+function numberSubsititution(word){
+  if(Math.random()>=0.5){
+    word = word.replace(/e/g,"3");
+  }
+  if(Math.random()>=0.5){
+    word = word.replace(/o/g,"0");
+  }
+  if(Math.random()>=0.5){
+    word = word.replace(/l/g,"1");
+  }
+  if(Math.random()>=0.5){
+    word = word.replace(/s/g,"5");
+  }
+  return word;
+
+}
 function randomSelect(){
   var max = document.querySelector("#Max").value;
   var min = document.querySelector("#Min").value;
   var maxLength = document.querySelector("#MaxLength").value;
+  var substitution_mode = document.querySelector("#numSubsti").checked;
+  var rightHand_mode = document.querySelector("#rightHand").checked;
   var lengthOfWords = 0;//lengthOfwords
   var result = [];
   while(lengthOfWords<=(maxLength-min)){
-    var element = string_list[getRandomInt(string_list_length)];
+    if(rightHand_mode){
+      var element = rHW_list[getRandomInt(rHW_list_length)];
+    }
+    else{
+      var element = string_list[getRandomInt(string_list_length)];
+    }
     if(element.length<=max && element.length>=min &&element.length<=(maxLength-lengthOfWords)){
+      if(substitution_mode==true){
+        var element = numberSubsititution(element);
+      }
       result.push(element);
       lengthOfWords= lengthOfWords +element.length;
     }
   }
-  var tbl = document.querySelector("#tbl")
-  var tr = document.createElement("tr")
+  var tbl = document.querySelector("#tbl");
+  var tr = document.createElement("tr");
   for(let element of result){
-    var td = document.createElement("td")
+    var td = document.createElement("td");
     td.innerHTML = element;
     tr.appendChild(td);
   }
-  var td = document.createElement("td")
+  var td = document.createElement("td");
   td.innerHTML = lengthOfWords;
   tr.appendChild(td);
   tbl.appendChild(tr);
