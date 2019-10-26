@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>My wish List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><center>My wish List</center></header>
+<nav>
+  <div class="log"><button id="loginButton" onclick="authenticate().then(loadClient().then(loadClient2()))">Authorize</button></div>
+  <div class="logout"><button id="logoutButton" onclick="signOut()">Sign Out</button></div>
+</nav>
+<section id ="main">
+  <center><button id = "creatList" onclick="creataList()">Creat a wish List</button></center>
+  <br>
+  <div id="listTitle">
+  <input id="inputTitle"></input><p id="enterTitle">Please enter your shoping list title</p>
+  <button id="titleSaver" onclick="saveTitle()"> Save</button>
+</div>
+  <div><h3 id ="mytitle"></h3>
+  <button id="changetitle" onclick="changeTitle()">Change Title</button>
+</div>
+  <br>
+  <div>
+  <input id="searchBar"></input>
+  <button id="searchButton" onclick="search()">search review</button>
+  <button id="addproduct" onclick="addproduct()">add this product</button>
+</div>
+</section>
+<ol id= "wishList"></ol>
+<div id="video-container"></div>
+<div id="content"></div>
+<div id="share"><button onclick="sendMessage()">share with</button><input id="emailAdress"></input>
+<p id="status"></p></div>
+<script src="https://apis.google.com/js/api.js">
+</script>
+<script src="controller.js"></script>
+<script src="google.js"></script>
+</body>
+</html>
