@@ -80,7 +80,7 @@ function sendMessage() {
           var order = 1;
           var wish_list = document.querySelector("#wishList");
           for(each of wish_list.children){
-            output+= `${order}. ${each.innerHTML.split(" ")[0]}\n`;
+            output+= `${order}. ${each.innerHTML.split(" <button ")[0]}\n`;
             order+=1;
           }
           var title = document.querySelector("#mytitle").innerHTML;
