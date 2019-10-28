@@ -44,6 +44,9 @@ div.logout{
   display: block;
   grid-column:2/3;
 }
+p#warning{
+  background-color: white;
+}
 div#video-container{
   display:grid;
   grid-auto-flow: column;

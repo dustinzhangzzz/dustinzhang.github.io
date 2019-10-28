@@ -9,6 +9,7 @@
   <div class="log"><button id="loginButton" onclick="authenticate().then(loadClient().then(loadClient2()))">Authorize</button></div>
   <div class="logout"><button id="logoutButton" onclick="signOut()">Sign Out</button></div>
 </nav>
+<p id ="warning">This website allows you to creat your own WishList and share with anyone using your gmail. You also can search the product reviews using Youtube. Enjoy! (You have to authorize your google account to use this website)</p>
 <section id ="main">
   <center><button id = "creatList" onclick="creataList()">Creat a wish List</button></center>
   <br>
@@ -31,9 +32,9 @@
 <div id="content"></div>
 <div id="share"><button onclick="sendMessage()">share with</button><input id="emailAdress"></input>
 <p id="status"></p></div>
+</body>
 <script src="https://apis.google.com/js/api.js">
 </script>
 <script src="controller.js"></script>
 <script src="google.js"></script>
-</body>
 </html>

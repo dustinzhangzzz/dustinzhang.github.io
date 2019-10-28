@@ -1,4 +1,5 @@
 function creataList(){
+  document.querySelector("#warning").style.display="none";
   var button = document.querySelector("#creatList");
   button.style.display = "none";
   var input = document.querySelector("#inputTitle");
