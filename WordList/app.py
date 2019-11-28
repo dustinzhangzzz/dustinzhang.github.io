@@ -45,7 +45,7 @@ csrf.init_app(app)
 @app.route('/index')
 def index():
     form = WordForm()
-    return render_template("index.html",name="Dustin Zhang",form=form,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io")
+    return render_template("index.html",name="Dustin Zhang",form=form,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io/tree/master/WordList")
 @app.route('/words', methods=['POST','GET'])
 def letters_2_words():
     form = WordForm()
@@ -58,13 +58,13 @@ def letters_2_words():
         return render_template("index.html", form=form)
     error1 = form.needOneInput(letters,expression)
     if error1:
-        return render_template("index.html", form=form, error = error1,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io")
+        return render_template("index.html", form=form, error = error1,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io/tree/master/WordList")
     error2 = form.validate_length(word_length,letters)
     if error2:
-        return render_template("index.html", form=form, error = error2,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io")
+        return render_template("index.html", form=form, error = error2,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io/tree/master/WordList")
     error3 = form.validate_pattern(word_length,expression)
     if error3:
-        return render_template("index.html", form=form, error = error3,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io")
+        return render_template("index.html", form=form, error = error3,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io/tree/master/WordList")
     with open('sowpods.txt') as f:
         good_words = set(x.strip().lower() for x in f.readlines())
     word_set = set()
@@ -95,7 +95,7 @@ def letters_2_words():
     empError = None;
     if len(wordSet)==0:
         empError = "No words found"
-    return render_template('wordlist.html',wordlist = wordSet,name="Dustin Zhang",myFunction = findDef, error =empError,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io")
+    return render_template('wordlist.html',wordlist = wordSet,name="Dustin Zhang",myFunction = findDef, error =empError,link="https://github.com/dustinzhangzzz/dustinzhangzzz.github.io/tree/master/WordList")
 @app.route('/proxy/<word>')
 def findDef(word):
     result = requests.get('https://www.dictionaryapi.com/api/v3/references/collegiate/json/'+word+'?key=0f8cf90e-40a7-49a5-bfab-5da06b43ce1f')
