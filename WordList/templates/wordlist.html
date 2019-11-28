@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+    {% for word in wordlist: %}
+        <div class="wordbox" onclick="showDef(this.innerHTML)">{{ word }}</div>
+    {% endfor %}
+    {% if error %}
+    <p class=error><strong> {{ error }}</strong>
+    {% endif %}
+    <div id="myModal" class="modal">
+    <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Definition</h2>
+    </div>
+    <div class="modal-body">
+      <p id="definition"><p>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+    </div>
+    </div>
+    <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var def = document.getElementById("definition");
+    function showDef(word){
+    modal.style.display = "block";
+    let init ={
+      method:"GET",
+      headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+    }
+      var myPromise =fetch("/proxy/"+word,init)
+      let  data= myPromise.then(function (resp) {
+        console.log('received response')
+     return resp.json();
+}).then(function (res) {
+  def.innerHTML = res;
+})
+.catch( (err) => def.innerHTML = "Error: Cannot getting definition")
+}
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+    if (event.target == modal) {
+    modal.style.display = "none";
+    }
+    }
+    </script>
+</main>
+{% endblock %}

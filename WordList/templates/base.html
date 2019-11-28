@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/wordstyle.css">
+    </head>
+    <body>
+        {% block navbar %}
+        <nav>
+            <h1>Word List Program by {{name}}</h1>
+        </nav>
+        {% endblock %}
+
+        {% block content %}
+        default content
+        {% endblock %}
+        <footer>
+          <h4>Github:<a href={{link}}>{{link}}</a></h4>
+        </footer>
+    </body>
+
+</html>
